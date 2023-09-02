@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft 3d bee</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Click the Beehive</h1>
+    <div class="camera">
+        <div class="scene">
+            <div class="tree">
+                <div class="leaves">
+                    <div class="crown-leaves">
+                        <div class="x-leaves leafy">
+                            <div class="top"></div>
+                            <div class="bottom"></div>
+                            <div class="front"></div>
+                            <div class="back"></div>
+                            <div class="left"></div>
+                            <div class="right"></div>
+                        </div>
+                        <div class="y-leaves leafy">
+                            <div class="top"></div>
+                            <div class="bottom"></div>
+                            <div class="front"></div>
+                            <div class="back"></div>
+                            <div class="left"></div>
+                            <div class="right"></div>
+                        </div>
+                    </div>
+                    <div class="top-leaves leafy">
+                        <div class="top"></div>
+                        <div class="bottom"></div>
+                        <div class="front"></div>
+                        <div class="back"></div>
+                        <div class="left"></div>
+                        <div class="right"></div>
+                    </div>
+                    <div class="base-leaves leafy">
+                        <div class="top"></div>
+                        <div class="bottom"></div>
+                        <div class="front"></div>
+                        <div class="back"></div>
+                        <div class="left"></div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <div class="log">
+                    <div class="side front"></div>
+                    <div class="side left"></div>
+                    <div class="side right"></div>
+                    <div class="side back"></div>
+                </div>
+                <button id="bee-btn" class="beehive">
+                    <div id="beehive-front" class="front beehive-full"></div>
+                    <div class="left side"></div>
+                    <div class="right side"></div>
+                    <div class="bottom"></div>
+                </button>
+            </div>
+            <div class="bee"><!--initial position-->
+                <div class="wubble"><!--so it goes up and down constantly-->
+                    <div class="bee-body">
+                        <div class="bee-rotate paused hide"><!--so I can move it around-->
+                            <div class="front"></div>
+                            <div class="back"></div>
+                            <div class="left"></div>
+                            <div class="right"></div>
+                            <div class="top"></div>
+                            <div class="bottom"></div>
+                            <div class="wing w-pos1">
+                                <div class="wing-mov w-1"></div>
+                            </div>
+                            <div class="wing w-pos2">
+                                <div class="wing-mov w-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flower">
+                <div class="flower-body f-a"></div>
+                <div class="flower-body f-b"></div>
+            </div>
+            <div class="floor"></div>
+            <div class="floor-extention"></div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>

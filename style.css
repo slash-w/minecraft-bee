@@ -1,0 +1,595 @@
+:root{
+    --size: 50px;
+    --rotateSpeed: 90s;
+    --bee-size: calc(var(--size)*1.25);
+    --bee-timing: 10s;
+    --wing-speed: 0.15s;
+}
+
+
+@keyframes rotateScene{
+    0% {
+        transform: rotateY(0deg);
+    }
+    25%{
+        transform: rotateY(80deg);
+    }
+    50%{
+        transform: rotateY(0deg);
+    }
+    75%{
+        transform: rotateY(-80deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes bee-wubble{
+    0%, 100%{
+        animation-timing-function: ease-in-out;
+        transform: translateY(0);
+    }
+    50%{
+        animation-timing-function: ease-in-out;
+        transform: translateY(calc(var(--size)*0.5));
+    }
+}
+
+@keyframes bee-path {
+    25%, 50%{
+        transform: 
+        translateX(calc(var(--size)*6))
+        translateY(calc(var(--size)*1))
+        translateZ(calc(var(--size)*4))
+        rotateY(360deg);
+    }
+}
+
+@keyframes bee-rotation {
+    50%{
+        transform: rotateY(90deg);
+    }
+    75%{
+        transform: rotateY(-270deg);
+    }
+    100%{
+        transform:
+        rotateY(-180deg)
+        translateX(calc(var(--size)*-1))
+        translateZ(calc(var(--size)*-1));
+        display: none;
+    }
+    
+}
+
+@keyframes wing1-rotation{
+    0%,100%{
+        transform-origin: 0% 50%;
+        transform: 
+        rotateY(0deg)
+        rotateZ(0deg);
+    }
+    50%{
+        transform-origin: 0% 50%;
+        transform: 
+        rotateY(-60deg)
+        rotateZ(-15deg);
+    }
+}
+
+@keyframes wing2-rotation{
+    0%,100%{
+        transform-origin: 100% 50%;
+        transform: 
+        rotateY(0deg)
+        rotateZ(0deg);
+    }
+    50%{
+        transform-origin: 100% 50%;
+        transform: 
+        rotateY(60deg)
+        rotateZ(15deg);
+    }
+}
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    position: absolute;
+}
+
+body{
+    margin: 0;
+    text-align: center;
+}
+
+h1{
+    position: absolute;
+    color: white;
+    z-index: 999;
+    left: 1rem;
+}
+
+.camera{
+    background: #000;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: calc(var(--size)*20);
+    perspective-origin: 50% calc(50% - calc(var(--size)*7));
+    
+}
+/*      ---SCENE---     */
+.scene{
+    position: relative;
+    transform-style: preserve-3d;
+    /* transform: rotateY(-90deg); */
+    animation: rotateScene var(--rotateSpeed) infinite linear;
+}
+
+/*      ---TREE---      */
+.tree{
+    transform-style: preserve-3d;
+    position: absolute;
+    bottom: calc(var(--size)*8);
+    transform: translateX(calc(var(--size)*-2)) translateZ(calc(var(--size)*-2));
+    .leafy > *{
+        background-image: url(./assets/leaves.png);
+        background-size: var(--size), calc(var(--size)) calc(var(--size));
+    }
+
+    /*      ---leaves---        */
+    .leaves{
+        transform-style: preserve-3d;
+        transform: translateY(calc(var(--size)*0));
+        .crown-leaves{
+            transform-style: preserve-3d;
+            .x-leaves{
+                transform-style: preserve-3d;
+                transform: translateY(calc(var(--size)*-4)) translateX(calc(var(--size)*2)) translateZ(calc(var(--size)*-1));
+                
+                .front, .back, .left, .right{
+                    box-shadow: inset
+                    calc(var(--size)*0) 
+                    calc(var(--size)*-0.2) 
+                    calc(var(--size)*1)
+                    calc(var(--size)*-0.2)
+                    #000a;;
+                }
+                
+                .front, .back{
+                    position: absolute;
+                    height: calc(var(--size)*1);
+                    width:  calc(var(--size)*1);
+                }
+                .front{
+                    transform: rotateY(90deg) translateX(calc(var(--size)*0.5)) translateZ(calc(var(--size)*-0.5));
+                }
+                .back{
+                    transform: rotateY(270deg) translateX(calc(var(--size)*-0.5)) translateZ(calc(var(--size)*-2.5));
+                }
+                .left, .right, .top{
+                    position: absolute;
+                    height: calc(var(--size)*1);
+                    width: calc(var(--size)*3);;
+                }
+                .right{
+                    transform: translateZ(calc(var(--size)*-1));
+                }
+                .top{
+                    transform: rotateX(90deg) translateY(calc(var(--size)*-0.5)) translateZ(calc(var(--size)*0.5));
+                }
+
+                
+            }
+            .y-leaves{
+                transform-style: preserve-3d;
+                transform: rotateY(90deg) translateY(calc(var(--size)*-4)) translateZ(calc(var(--size)*4));
+                
+                .front, .back, .left, .right{
+                    box-shadow: inset
+                    calc(var(--size)*0) 
+                    calc(var(--size)*-0.2) 
+                    calc(var(--size)*1)
+                    calc(var(--size)*-0.2)
+                    #000a;;
+                }
+                
+                .front, .back{
+                    position: absolute;
+                    height: calc(var(--size)*1);
+                    width:  calc(var(--size)*1);
+                }
+                .front{
+                    transform: rotateY(90deg) translateX(calc(var(--size)*0.5)) translateZ(calc(var(--size)*-0.5));
+                }
+                .back{
+                    transform: rotateY(270deg) translateX(calc(var(--size)*-0.5)) translateZ(calc(var(--size)*-2.5));
+                }
+                .left, .right, .top{
+                    position: absolute;
+                    height: calc(var(--size)*1);
+                    width: calc(var(--size)*3);;
+                }
+                .right{
+                    transform: translateZ(calc(var(--size)*-1));
+                }
+                .top{
+                    transform: rotateX(90deg) translateY(calc(var(--size)*-0.5)) translateZ(calc(var(--size)*0.5));
+                }
+
+            }
+        }
+
+        .top-leaves{
+            transform-style: preserve-3d;
+            transform: translateX(calc(var(--size)*2)) translateY(calc(var(--size)*-3));
+            .top{
+                position: absolute;
+                height: calc(var(--size)*3);
+                width:  calc(var(--size)*3);
+                transform: rotateX(90deg) translateZ(calc(var(--size)*1.5)) translateY(calc(var(--size)*-1.5));
+            }
+            .front, .back, .left, .right{
+                position: absolute;
+                height: calc(var(--size));
+                width: calc(var(--size)*3);
+            }
+            .front{
+                box-shadow: inset
+                calc(var(--size)*0.25) 
+                calc(var(--size)*-0.2) 
+                calc(var(--size)*1)
+                calc(var(--size)*-0.2)
+                #000a;;
+            }
+            .back{
+                transform: translateZ(calc(var(--size)*-3));
+                box-shadow: inset
+                calc(var(--size)*-1) 
+                calc(var(--size)*-1) 
+                calc(var(--size)*1)
+                calc(var(--size)*-0.2)
+                #000a;;
+            }
+            .right{
+                transform: rotateY(90deg) translateZ(calc(var(--size)*1.5)) translateX(calc(var(--size)*1.5));
+                box-shadow: inset
+                calc(var(--size)*0.25) 
+                calc(var(--size)*-0.2) 
+                calc(var(--size)*1)
+                calc(var(--size)*-0.2)
+                #000a;;
+            }
+            .left{
+                transform: rotateY(270deg) translateZ(calc(var(--size)*1.5)) translateX(calc(var(--size)*-1.5));
+                box-shadow: inset
+                calc(var(--size)*-1) 
+                calc(var(--size)*-1) 
+                calc(var(--size)*1)
+                calc(var(--size)*-0.2)
+                #000a;;
+            }
+        }
+
+        .base-leaves{
+            transform-style: preserve-3d;
+            transform: translateX(calc(var(--size)*1)) translateY(calc(var(--size)*-2)) translateZ(calc(var(--size)*1));
+            .front, .back, .left, .right{
+                position: absolute;
+                height: calc(var(--size)*2);
+                width: calc(var(--size)*5);
+            }
+            .top,.bottom{
+                position: absolute;
+                height: calc(var(--size)*5);
+                width: calc(var(--size)*5);
+            }
+
+            .top{
+                transform: rotateX(90deg) translateZ(calc(var(--size)*2.5)) translateY(calc(var(--size)*-2.5));
+                box-shadow: inset
+                calc(var(--size)*1) 
+                calc(var(--size)*-0.5) 
+                calc(var(--size)*1)
+                calc(var(--size)*-0.2)
+                #000a;;
+            }
+            .bottom{
+                transform: rotateX(90deg) translateZ(calc(var(--size)*0.5)) translateY(calc(var(--size)*-2.5));
+            }
+            .front{
+                box-shadow: inset
+                calc(var(--size)*0) 
+                calc(var(--size)*-0.5) 
+                calc(var(--size)*1)
+                calc(var(--size)*-0.2)
+                #000a;;
+            }
+
+            .back{
+                transform: 
+                translateZ(calc(var(--size)*-5));
+                
+                box-shadow: inset
+                calc(var(--size)*-0) 
+                calc(var(--size)*-1.5) 
+                calc(var(--size)*1) #000a;
+            }
+            .left{
+                transform: 
+                rotateY(90deg) 
+                translateZ(calc(var(--size)*2.5)) 
+                translateX(calc(var(--size)*2.5));
+
+                box-shadow: inset
+                calc(var(--size)*-0) 
+                calc(var(--size)*-0.5) 
+                calc(var(--size)*1)
+                calc(var(--size)*-0.2)
+                #000a;;
+            }
+            .right{
+                transform: 
+                rotateY(270deg) 
+                translateZ(calc(var(--size)*2.5)) 
+                translateX(calc(var(--size)*-2.5));
+
+                box-shadow: inset
+                calc(var(--size)*-0) 
+                calc(var(--size)*-1.5) 
+                calc(var(--size)*1) #000a;;
+            }
+        }
+    }
+
+    /*      ---log---       */
+    .log{
+        transform-style: preserve-3d;
+        transform: translateX(calc(var(--size)*3)) translateZ(calc(var(--size)*-2));
+        .side{
+            position: absolute;
+            height: calc(var(--size)*3);
+            width: var(--size);
+            background-image: url(./assets/oak_side.webp);
+            background-size: 100%, calc(var(--size)) calc(var(--size));
+        }
+        .front{
+            transform: translateZ(var(--size));
+            box-shadow: inset 
+            calc(var(--size)*0.15) 
+            calc(var(--size)*-0.5) 
+            calc(var(--size)*0.9) #000a;
+        }
+        .left{
+            transform: 
+            rotateY(90deg) 
+            translateX(calc(var(--size)*-0.5)) 
+            translateZ(calc(var(--size)*0.5));
+
+            box-shadow: inset 
+            calc(var(--size)*-0.35) 
+            calc(var(--size)*-0.65) 
+            calc(var(--size)*0.9) #000a;
+        }
+        .right{
+            transform: 
+            rotateY(90deg) 
+            translateX(calc(var(--size)*-0.5)) 
+            translateZ(calc(var(--size)*-0.5));
+
+            box-shadow: inset 
+            calc(var(--size)*-0.5) 
+            calc(var(--size)*-0.5) 
+            calc(var(--size)*0.5)
+            calc(var(--size)*0.3)
+            #000a;
+        }
+        .back{
+            box-shadow: inset 
+            calc(var(--size)*1) 
+            calc(var(--size)*1) 
+            calc(var(--size)*1) 
+            #000a;
+        }
+
+    }
+
+    /*      ---beehive---       */
+    .beehive div{
+        position: absolute;
+        transform-style: preserve-3d;
+        height: var(--size);
+        width: var(--size);
+        background-size: 100%, calc(var(--size)) calc(var(--size));
+    }
+    .beehive{
+        transform-style: preserve-3d;
+        transform: translateX(calc(var(--size)*3));
+        .side{
+            background-image: url(./assets/Beenest/side.webp);
+        }
+        .bottom{
+            background-image: url(./assets/Beenest/bottom.webp);
+            transform: rotateX(90deg) translateY(calc(var(--size)*-0.5)) translateZ(calc(var(--size)*-0.5));
+        }
+        .left{
+            transform: rotateY(90deg) translateX(calc(var(--size)*0.5)) translateZ(calc(var(--size)*0.5));
+        }
+        .right{
+            transform: rotateY(270deg) translateX(calc(var(--size)*-0.5)) translateZ(calc(var(--size)*0.5));
+        }
+    }
+}
+
+/*      ---BEE---       */
+.bee{
+
+    transform-style: preserve-3d;
+    transform: 
+    translateX(calc(var(--size)*1))
+    translateY(calc(var(--size)*2))
+    translateZ(calc(var(--size)*-2));
+
+    .wubble{
+        transform-style: preserve-3d;
+        animation: bee-wubble 2s infinite ease-in-out;
+        .bee-body div{
+            position: absolute;
+            background-size: var(--size), calc(var(--size)) calc(var(--size));
+        }
+        .bee-rotate{
+            transform-style: preserve-3d;
+        }
+        .bee-body{
+            transform-style: preserve-3d;
+            
+
+            .w-pos1{
+                transform-style: preserve-3d;
+                transform: 
+                rotateX(90deg)
+                translateX(calc(var(--size)*0.85))
+                translateY(calc(var(--size)*0.2));
+                .w-1{
+                    height: var(--size);
+                    width: var(--size);
+                    animation: wing1-rotation var(--wing-speed) infinite ease-in-out;
+                    transform-style: preserve-3d;
+                    background-image: url(./assets/bee/wing1.png);
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .w-pos2{
+                transform-style: preserve-3d;
+                transform: 
+                rotateX(90deg)
+                translateX(calc(var(--size)*-0.85))
+                translateY(calc(var(--size)*0.2));
+                .w-2{
+                    height: var(--size);
+                    width: var(--size);
+                    animation: wing2-rotation var(--wing-speed) infinite ease-in-out;
+                    transform-style: preserve-3d;
+                    background-image: url(./assets/bee/wing2.png);
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+            }
+
+
+            .front, .back{
+                height: var(--size);
+                width: var(--size);
+            }
+            .left, .right{
+                height: var(--size);
+                width: var(--bee-size);
+                background-size: var(--bee-size) calc(var(--size));
+            }
+            .top, .bottom{
+                height: var(--bee-size);
+                width: var(--size);
+                background-size: var(--size) var(--bee-size);
+            }
+            .front{
+                background-image: url(./assets/bee/face.png);
+                transform: translateZ(var(--bee-size));
+            }
+            .back{
+                background-image: url(./assets/bee/back.png);
+                
+            }
+            .left{
+                background-image: url(./assets/bee/left.png);
+                transform: rotateY(90deg) translateZ(calc(var(--bee-size)*0.285)) translateX(calc(var(--bee-size)*-0.5));
+            }
+            .right{
+                background-image: url(./assets/bee/right.png);
+                transform: rotateY(270deg) translateZ(calc(var(--bee-size)*0.485)) translateX(calc(var(--bee-size)*0.5));
+            }
+            .top{
+                background-image: url(./assets/bee/top.png);
+                transform: rotateX(90deg) translateY(calc(var(--bee-size)*0.5)) translateZ(calc(var(--bee-size)*0.5));
+            }
+            .bottom{
+                background-image: url(./assets/bee/bottom.png);
+                transform: rotateX(90deg) translateY(calc(var(--bee-size)*0.5)) translateZ(calc(var(--bee-size)*-0.3));
+            }
+        }
+    }
+}
+
+/*      ---FLOWER---    */
+.flower{
+    transform-style: preserve-3d;
+    transform: translateX(calc(var(--size)*5.675)) translateY(calc(var(--size)*4)) translateZ(calc(var(--size)*-1.675)) rotateY(45deg);
+    .flower-body{
+        transform-style: preserve-3d;
+        position: absolute;
+        height: var(--size);
+        width: var(--size);
+        background-image: url(./assets/flower.webp);
+        background-size: var(--size), calc(var(--size)) calc(var(--size));
+        
+        
+    }
+    .f-b{
+        transform-style: preserve-3d;
+        transform: rotateY(90deg);
+    }
+}
+
+/*      ---FLOOR---     */
+.floor{
+    width: calc(var(--size) * 10);
+    aspect-ratio: 1;
+    transform: rotateX(90deg);
+}
+
+.floor-extention{
+    position: absolute;
+    bottom: -31.1rem;
+    left:   -31.1rem;
+    width: calc(var(--size) * 30);
+    aspect-ratio: 1;
+    background-image: 
+    radial-gradient(#0001, #000F 60%),
+    url(./assets/grass.jpg);   
+    background-size: 100%, calc(var(--size)) calc(var(--size));
+
+    transform: rotateX(90deg);
+}
+
+
+/*      ---STUFF FOR ONCLICK---*/
+    /*      ---BEHIVE---    */
+.beehive-full{
+    background-image: url(./assets/Beenest/front_full.webp);
+}
+.beehive-empty{
+    background-image: url(./assets/Beenest/front_empty.webp);
+}
+
+.bee-rotation{
+
+    animation: bee-rotation var(--bee-timing) ease forwards 1;
+}
+.bee-pathing{
+    animation: bee-path var(--bee-timing) ease-in-out forwards 1;
+}
+
+.hide{
+    display: none;
+}
